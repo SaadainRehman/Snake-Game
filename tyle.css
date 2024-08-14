@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 * {
     padding:0 ;
     margin: 0;
@@ -24,14 +25,24 @@
 
 }
 .head{
-    background-color: yellow;
-    border-radius: 30%;
+    background: linear-gradient(70deg , rgb(2, 79, 2) , rgb(8, 81, 4));
+    border-radius: 12px;
 }
 .food{
-    background-color: burlywood;
-    border-radius: 30%;
+    background: linear-gradient(13deg , red , greenyellow);
+    border: 1px solid white;
+    border-radius: 8px;
 }
 .snake{
-    background-color: aqua;
-    
+    background: linear-gradient(1100deg , darkgreen , greenyellow);
+    border-radius: 10px;
+}
+
+#scoreBox{
+    position: absolute;
+    top: 40px;
+    right: 300px;
+    font-size: 40px;
+    font-family: "Exo 2", sans-serif;
+    color: whitesmoke;
 }
