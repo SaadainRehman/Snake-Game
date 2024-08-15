@@ -6,7 +6,7 @@
 }
 
 .body{
-    background-image: url(./bg/bg.jpg);
+    background-image: url(./bg/background.jpeg);
     min-height: 100vh;
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
@@ -15,17 +15,18 @@
     align-items: center;
 }
 .board{
-    background: linear-gradient( 134deg , rgb(229, 242, 91), rgb(195, 229, 153));
+    /* background: linear-gradient( 144deg , rgb(7, 77, 19), rgb(40, 97, 62) , rgb(33, 135, 33)); */
+    background-image: url(./bg/game\ bg.jpg);
     height: 90vmin;
     width: 90vmin;
-    box-shadow: 2px 02px 12px 2px white;
+    box-shadow: 2px 02px 12px 2px gray;
     display: grid;
     grid-template-rows: repeat(20 , 1fr);
     grid-template-columns: repeat(20 , 1fr);
 
 }
 .head{
-    background: linear-gradient(70deg , rgb(2, 79, 2) , rgb(8, 81, 4));
+    background: linear-gradient(70deg , rgb(163, 211, 163) , rgb(41, 123, 0));
     border-radius: 12px;
 }
 .food{
@@ -41,8 +42,55 @@
 #scoreBox{
     position: absolute;
     top: 40px;
-    right: 300px;
+    right: 250px;
     font-size: 40px;
     font-family: "Exo 2", sans-serif;
-    color: whitesmoke;
+    color: white;
+}
+
+button{
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    left: 170px;
+    background-color: darkgreen;
+    border: none;
+    font-size: 20px;
+    color: wheat;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px 5px rgb(63, 112, 63);
+    cursor: pointer;
+}
+.difficulty{
+    position: absolute;
+    left: 120px;
+    top: 300px;
+    color: white;
+    height: auto;
+    width: auto;
+    display: flex;
+}
+p{
+    font-size: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding-bottom: 10px;
+    text-decoration: underline;
+}
+.diff{
+    height: 30px;
+    width: 45px;
+    font-size: 20px;
+    margin-left: 20px;
+    /* margin-left: 45px; */
+    background-color: rgb(10, 150, 10);
+    color: antiquewhite;
+    border-radius: 10px;
+    padding: 3px;
+}
+input::placeholder{
+    color: aliceblue;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    box-shadow: 5px 50px 20px 5px rgb(63, 112, 63);
 }
