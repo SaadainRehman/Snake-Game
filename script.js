@@ -1,5 +1,6 @@
 // Game constants
-let highScore = localStorage.getItem("high-score");
+let hiScore = localStorage.getItem("hiScore");
+let hiScoreBox = document.querySelector(".hiScore");
 let inputDir = { x: 0, y: 0 };
 const foodSound = new Audio("./music/food.mp3");
 const moveSound = new Audio("./music/move.mp3");
@@ -8,19 +9,31 @@ const gameOverSound = new Audio("./music/gameover.mp3");
 const board = document.querySelector(".board");
 const startButton = document.querySelector(".startbtn");
 const difficultySelect = document.querySelector(".diff");
-let speed = 7;
+let speed = 10;
 let lastPaintTime = 0;
 let snakeArr = [{ x: 14, y: 16 }];
 let score = 0;
 
 food = { x: 12, y: 10 };
 
+
+let hiScoreVal;
+if(hiScore === null){
+  hiScoreVal = 0;
+  localStorage.setItem("hiScore", JSON.stringify(hiScoreVal))
+}
+else{
+  hiScoreVal = JSON.parse(hiScore);
+  hiScoreBox.innerHTML = "High Score : " + hiScore;
+}
+
+
+
 difficultySelect.addEventListener("change", (e) => {
   const difficulty = parseInt(e.target.value);
-  speed = 5 + difficulty + 2; 
+  speed = 5 + difficulty + 2;
 });
 
-// Game Functions
 function main(cTime) {
   window.requestAnimationFrame(main);
   if ((cTime - lastPaintTime) / 1000 < 1 / speed) {
@@ -51,8 +64,7 @@ function isCollide(snake) {
 }
 
 function gameEngine() {
-  musicSound.play()
-  // part 1 : updating snake array & food
+  musicSound.play();
 
   if (isCollide(snakeArr)) {
     gameOverSound.play();
@@ -60,17 +72,20 @@ function gameEngine() {
     inputDir = { x: 0, y: 0 };
     alert("Game Over , Press any key to continue");
     snakeArr = [{ x: 14, y: 16 }];
-    // musicSound.play();
     score = 0;
-    scoreBox.innerHTML = "Score " + 0;
+    scoreBox.innerHTML = "Score : " + 0;
   }
 
-  // if snake has eaten the food increment the score and regenerate the food
 
   if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
     foodSound.play();
     score = score + 1;
-    scoreBox.innerHTML = "Score " + score;
+    if(score>hiScoreVal){
+      hiScoreVal = score;
+      localStorage.setItem("hiScore", JSON.stringify(hiScoreVal));
+      hiScoreBox.innerHTML = "High Score : " + hiScoreVal;
+  }
+    scoreBox.innerHTML = "Score : " + score;
     snakeArr.unshift({
       x: snakeArr[0].x + inputDir.x,
       y: snakeArr[0].y + inputDir.y,
@@ -92,8 +107,8 @@ function gameEngine() {
   snakeArr[0].y += inputDir.y;
 
   // part 2 : display snake array & food
-
   //  displaysnake
+
   board.innerHTML = "";
   snakeArr.forEach((e, index) => {
     let snakeElement = document.createElement("div");
@@ -117,64 +132,34 @@ function gameEngine() {
 
 // Game logic
 
-startButton.addEventListener("click",() => {
-    gameEngine();
-    window.requestAnimationFrame(main);
-    window.addEventListener("keydown", (e) => {
-      moveSound.play();
-      switch (e.key) {
-        case "ArrowUp":
-          // console.log("ArrowUp");
-          inputDir.x = 0;
-          inputDir.y = -1;
-          break;
-        case "ArrowDown":
-          // console.log("ArrowDown");
-          inputDir.x = 0;
-          inputDir.y = 1;
-          break;
-        case "ArrowLeft":
-          // console.log("ArrowLeft");
-          inputDir.x = -1;
-          inputDir.y = 0;
-          break;
-        case "ArrowRight":
-          // console.log("ArrowRight");
-          inputDir.x = 1;
-          inputDir.y = 0;
-          break;
-        default:
-          break;
-      }
-    });
-  })
-;
-
-// window.requestAnimationFrame(main);
-// window.addEventListener("keydown", (e) => {
-//     moveSound.play();
-//     switch (e.key) {
-//       case "ArrowUp":
-//         // console.log("ArrowUp");
-//         inputDir.x = 0;
-//         inputDir.y = -1;
-//         break;
-//       case "ArrowDown":
-//         // console.log("ArrowDown");
-//         inputDir.x = 0;
-//         inputDir.y = 1;
-//         break;
-//       case "ArrowLeft":
-//         // console.log("ArrowLeft");
-//         inputDir.x = -1;
-//         inputDir.y = 0;
-//         break;
-//       case "ArrowRight":
-//         // console.log("ArrowRight");
-//         inputDir.x = 1;
-//         inputDir.y = 0;
-//         break;
-//     default:
-//         break;
-//     }
-//   });
+startButton.addEventListener("click", () => {
+  gameEngine();
+  window.requestAnimationFrame(main);
+  window.addEventListener("keydown", (e) => {
+    moveSound.play();
+    switch (e.key) {
+      case "ArrowUp":
+        // console.log("ArrowUp");
+        inputDir.x = 0;
+        inputDir.y = -1;
+        break;
+      case "ArrowDown":
+        // console.log("ArrowDown");
+        inputDir.x = 0;
+        inputDir.y = 1;
+        break;
+      case "ArrowLeft":
+        // console.log("ArrowLeft");
+        inputDir.x = -1;
+        inputDir.y = 0;
+        break;
+      case "ArrowRight":
+        // console.log("ArrowRight");
+        inputDir.x = 1;
+        inputDir.y = 0;
+        break;
+      default:
+        break;
+    }
+  });
+});
